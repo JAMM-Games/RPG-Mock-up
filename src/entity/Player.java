@@ -24,6 +24,12 @@ public class Player extends Entity {
         screenX = gp.screenWidth / 2 - gp.tileSize/2;
         screenY = gp.screenHeight / 2 - gp.tileSize/2;
 
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidArea.width = 32;
+        solidArea.height = 32;
+
         setDefaultValues();
         getPlayerImage();
 
@@ -54,19 +60,37 @@ public class Player extends Entity {
     }
 
     public void update() {
-        if(keyH.upPressed) {
-            direction = "up";
-            worldY -= speed; // move up
-        }else if(keyH.downPressed) {
-            direction = "down";
-            worldY+= speed; // move down
-        } else if(keyH.leftPressed) {
-            direction = "left";
-            worldX -= speed; // move left
-        } else if(keyH.rightPressed) {
-            direction = "right";
-            worldX += speed; // move right
+        boolean moving = keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed;
+
+        if(moving) {
+            if(keyH.upPressed) direction = "up";
+            else if(keyH.downPressed) direction = "down";
+            else if(keyH.leftPressed) direction = "left";
+            else if(keyH.rightPressed) direction = "right";
+
+        //CHECK TILE COLLISION
+        collisionOn = false;
+        gp.cChecker.checkTile(this); // check for collision with tiles
+
+        //IF COLLISION IF FALSE, PLAYER CAN MOVE
+        if(!collisionOn) {
+            switch (direction) {
+                case "up":
+                    worldY -= speed;
+                    break;
+                case "down":
+                    worldY += speed;
+                    break;
+                case "left":
+                    worldX -= speed;
+                    break;
+                case "right":
+                    worldX += speed;
+                    break;
+            }
         }
+        }
+
         spriteCounter++;
         if(spriteCounter > 15) {
             if(spriteNum == 1) {
