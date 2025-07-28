@@ -21,7 +21,7 @@ public class TileManager {
         this.gp = gp;
         tile = new Tile[10];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
-        treeTileNum = new int[gp.maxScreenCol][gp.maxScreenRow]; // initialize
+//        treeTileNum = new int[gp.maxScreenCol][gp.maxScreenRow]; // initialize
 
 
         getTileImage();
@@ -41,13 +41,25 @@ public class TileManager {
             tile[2].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water1.png")));
             tile[2].collision = true;
             tile[3] = new Tile();
-            tile[3].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/stones/stone.png")));
+            tile[3].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/stones/stone-top.png")));
             tile[3].collision = true;
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/earths/tree.png")));
             tile[4].collision = true;
             tile[5] = new Tile();
             tile[5].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/earths/path.png")));
+            tile[6] = new Tile();
+            tile[6].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/stones/left-corner-stone.png")));
+            tile[6].collision = true;
+            tile[7] = new Tile();
+            tile[7].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/stones/stone-left-corner.png")));
+            tile[7].collision = true;
+            tile[8] = new Tile();
+            tile[8].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/stones/right-corner-stone.png")));
+            tile[8].collision = true;
+            tile[9] = new Tile();
+            tile[9].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/stones/stone-right-corner.png")));
+            tile[9].collision = true;
 
         }catch(IOException e) {
             e.printStackTrace();

@@ -16,6 +16,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
+    public int hasKey = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -27,6 +28,8 @@ public class Player extends Entity {
         solidArea = new Rectangle();
         solidArea.x = 8;
         solidArea.y = 16;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
         solidArea.width = 32;
         solidArea.height = 32;
 
@@ -38,7 +41,7 @@ public class Player extends Entity {
     public void setDefaultValues() {
         worldX = gp.tileSize * 23; // set initial worldX position
         worldY = gp.tileSize * 21; // set initial worldY position
-        speed = 4;
+        speed = 5;
         direction = "down";
     }
 
@@ -72,6 +75,10 @@ public class Player extends Entity {
         collisionOn = false;
         gp.cChecker.checkTile(this); // check for collision with tiles
 
+        //CHECK  OBJECT COLLISION
+        int objIndex = gp.cChecker.checkObject(this,true);
+        pickUpObject(objIndex);
+
         //IF COLLISION IF FALSE, PLAYER CAN MOVE
         if(!collisionOn) {
             switch (direction) {
@@ -99,6 +106,35 @@ public class Player extends Entity {
                 spriteNum = 1;
             }
             spriteCounter = 0;
+        }
+    }
+
+    public void pickUpObject(int i) {
+        if(i != 999) {
+
+            String objectName = gp.obj[i].name;
+
+            switch(objectName) {
+                case "Key":
+//                    gp.playSE(1);
+                    hasKey++;
+                    gp.obj[i] = null;
+                    System.out.println("Key: " + hasKey);
+                    break;
+                case "Door":
+//                    gp.playSE(2);
+                    if(hasKey > 0) {
+                        gp.obj[i] = null;
+                        hasKey--;
+                        System.out.println("Door opened! Remaining keys: " + hasKey);
+                    }
+                    break;
+                case "Boots":
+//                    gp.playSE(3);
+                    speed += 2;
+                    gp.obj[i] = null;
+                    break;
+            }
         }
     }
 
