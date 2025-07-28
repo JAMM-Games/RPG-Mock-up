@@ -41,7 +41,7 @@ public class Player extends Entity {
     public void setDefaultValues() {
         worldX = gp.tileSize * 23; // set initial worldX position
         worldY = gp.tileSize * 21; // set initial worldY position
-        speed = 5;
+        speed = 4;
         direction = "down";
     }
 
@@ -131,7 +131,7 @@ public class Player extends Entity {
                     break;
                 case "Boots":
 //                    gp.playSE(3);
-                    speed += 2;
+                    speed += 1;
                     gp.obj[i] = null;
                     break;
             }
@@ -158,7 +158,7 @@ public class Player extends Entity {
                 if(spriteNum == 1) image = right1;
                 if(spriteNum == 2) image = right2;
                 break;
-        };
+        }
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 
     }
