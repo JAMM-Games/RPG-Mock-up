@@ -1,6 +1,7 @@
 package main;
 
 import entity.Player;
+import object.SuperObject;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -26,13 +27,23 @@ public class GamePanel extends JPanel implements Runnable {
     public final int worldHeight = tileSize * maxWorldRow;
 
     //FPS
-    int FPS = 60;
+    public int FPS = 60;
 
+    //SYSTEM
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
-    Thread gameThread; // thread for the game loop. this will call the run method
+    Sound music = new Sound();
+    Sound se = new Sound();
+
+    //COLLISION AND ASSETS
     public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter aSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
+    Thread gameThread; // thread for the game loop. this will call the run method
+
+    //ENTITY AND OBJECT
     public Player player = new Player(this, keyH); // create a player object
+    public SuperObject[] obj = new SuperObject[10]; // array to hold objects in the game
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -40,6 +51,11 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true); // improve game's rendering performance
         this.addKeyListener(keyH); // add key listener to the game panel
         this.setFocusable(true); // make the game panel focusable so it can receive key events
+    }
+
+    public void setupGame() {
+        aSetter.setObject();
+        playMusic(0);
     }
 
     public void startGameThread() {
@@ -91,14 +107,41 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void paintComponent(Graphics g) {
 
+
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D)g;
-
+        //TILE
         tileM.draw(g2);
 
+        //OBJECTS
+        for (SuperObject objTile : obj) {
+            if (objTile != null) {
+                objTile.draw(g2, this);
+            }
+        }
+
+        //PLAYER
         player.draw(g2);
+
+        ui.draw(g2);
 
         g2.dispose();
     }
+
+    public void playMusic(int i) {
+        music.setFile(i);
+        music.play();
+        music.loop();
+    }
+
+    public void stopMusic() {
+        music.stop();
+    }
+
+    public void playSE(int i) {
+        se.setFile(i);
+        se.play();
+    }
+
 }

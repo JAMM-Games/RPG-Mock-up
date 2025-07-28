@@ -19,7 +19,7 @@ public class Main {
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-
+        gamepanel.setupGame(); // Set up the game, including assets and objects
         gamepanel.startGameThread();
     }
 
