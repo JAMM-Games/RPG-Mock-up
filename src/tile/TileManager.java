@@ -21,12 +21,10 @@ public class TileManager {
         this.gp = gp;
         tile = new Tile[10];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
-//        treeTileNum = new int[gp.maxScreenCol][gp.maxScreenRow]; // initialize
 
 
         getTileImage();
         loadMap("/maps/zero-map.txt");
-//        loadTreeMap("/maps/tree-test.txt");
     }
 
     public void getTileImage(){
@@ -97,31 +95,6 @@ public class TileManager {
             System.out.println("Error loading map file");
         }
     }
-
-//    public void loadTreeMap(String filePath){
-//        try{
-//            InputStream is = getClass().getResourceAsStream(filePath);
-//            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-//            int col = 0, row = 0;
-//            while(col < gp.maxScreenCol && row < gp.maxScreenRow) {
-//                String line = br.readLine();
-//                String[] numbers = line.split(" ");
-//                while(col < gp.maxScreenCol) {
-//                    int num = Integer.parseInt(numbers[col]);
-//                    treeTileNum[col][row] = num;
-//                    col++;
-//                }
-//                if(col == gp.maxScreenCol) {
-//                    col = 0;
-//                    row++;
-//                }
-//            }
-//            br.close();
-//        }catch(Exception e) {
-//            e.printStackTrace();
-//            System.out.println("Error loading tree map file");
-//        }
-//    }
 
     public void draw(Graphics2D g2) {
 
