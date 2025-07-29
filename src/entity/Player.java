@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -47,19 +48,27 @@ public class Player extends Entity {
 
     public void getPlayerImage() {
 
-        try{
-            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/up#1.png")));
-            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/up#2.png")));
-            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/down#1.png")));
-            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/down#2.png")));
-            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/left#1.png")));
-            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/left#2.png")));
-            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/right#1.png")));
-            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/right#2.png")));
+        up1 = setup("up#1");
+        up2 = setup("up#2");
+        down1 = setup("down#1");
+        down2 = setup("down#2");
+        left1 = setup("left#1");
+        left2 = setup("left#2");
+        right1 = setup("right#1");
+        right2 = setup("right#2");
+    }
 
-        }catch(IOException e) {
+    public BufferedImage setup (String imageName) {
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(getClass().getResourceAsStream("/player/" + imageName + ".png"));
+            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        return image;
     }
 
     public void update() {
@@ -79,7 +88,7 @@ public class Player extends Entity {
         int objIndex = gp.cChecker.checkObject(this,true);
         pickUpObject(objIndex);
 
-        //IF COLLISION IF FALSE, PLAYER CAN MOVE
+        //IF COLLISION IS FALSE, PLAYER CAN MOVE
         if(!collisionOn) {
             switch (direction) {
                 case "up":
@@ -147,6 +156,7 @@ public class Player extends Entity {
     public void draw(Graphics2D g2) {
 
         BufferedImage image = null;
+
         switch (direction) {
             case "up":
                 if(spriteNum == 1) image = up1;
@@ -165,7 +175,7 @@ public class Player extends Entity {
                 if(spriteNum == 2) image = right2;
                 break;
         }
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY,null);
 
     }
 }
