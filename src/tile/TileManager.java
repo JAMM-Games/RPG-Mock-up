@@ -19,12 +19,14 @@ public class TileManager {
 
     public TileManager(GamePanel gp){
         this.gp = gp;
-        tile = new Tile[10];
+        tile = new Tile[15];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
 
         getTileImage();
-        loadMap("/maps/zero-map.txt");
+//        loadMap("/maps/zero-map.txt");
+        loadMap("/maps/clean_realWorldMap.txt");
+
     }
 
     public void getTileImage(){
@@ -58,6 +60,20 @@ public class TileManager {
             tile[9] = new Tile();
             tile[9].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/stones/stone-right-corner.png")));
             tile[9].collision = true;
+            tile[10] = new Tile();
+            tile[10].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/stones/stone-back.png")));
+            tile[10].collision = true;
+            tile[11] = new Tile();
+            tile[11].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/stones/left-stone-door-way.png")));
+            tile[11].collision = true;
+            tile[12] = new Tile();
+            tile[12].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/stones/right-stone-door-way.png")));
+            tile[12].collision = true;
+            tile[13] = new Tile();
+            tile[13].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/earths/mountain.png")));
+            tile[13].collision = true;
+            tile[14] = new Tile();
+            tile[14].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/village.png")));
 
         }catch(IOException e) {
             e.printStackTrace();
