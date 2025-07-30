@@ -21,8 +21,8 @@ public class GamePanel extends JPanel implements Runnable {
     //576x768 actual screen size
 
     // World settings
-    public final int maxWorldCol = 100;
-    public final int maxWorldRow = 100;
+    public final int maxWorldCol = 50;
+    public final int maxWorldRow = 50;
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
 
@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     //SYSTEM
     TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
     Sound se = new Sound();
 
@@ -45,6 +45,11 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH); // create a player object
     public SuperObject[] obj = new SuperObject[10]; // array to hold objects in the game
 
+    //GAME STATE
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -56,6 +61,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         aSetter.setObject();
         playMusic(0);
+        gameState = playState; // set the game state to play state
     }
 
     public void startGameThread() {
@@ -101,8 +107,12 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
+        if(gameState == playState) {
+            player.update();
+        }
+        if(gameState == pauseState) {
 
-        player.update();
+        }
     }
 
     public void paintComponent(Graphics g) {

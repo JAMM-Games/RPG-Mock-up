@@ -16,7 +16,6 @@ public class TileManager {
     GamePanel gp;
     public Tile[] tile;
     public int[][] mapTileNum;
-    int[][] treeTileNum; // to store tree tile numbers
 
     public TileManager(GamePanel gp){
         this.gp = gp;
@@ -26,7 +25,7 @@ public class TileManager {
 
         getTileImage();
 //        loadMap("/maps/zero-map.txt");
-        loadMap("/maps/clean_realWorldMap.txt");
+        loadMap("/maps/clean_worldV2.txt");
 
     }
 
