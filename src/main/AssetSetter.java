@@ -25,4 +25,12 @@ public class AssetSetter {
         gp.obj[2].worldX = 23 * gp.tileSize; // set the x position of the key
         gp.obj[2].worldY = 23 * gp.tileSize; // set the y position of the key
     }
+
+    public void setNPC() {
+        // This method can be used to set NPCs in the future
+        // Currently, it is not implemented
+        gp.npc[0] = new entity.Shy_NPC(gp);
+        gp.npc[0].worldX = gp.tileSize*25;
+        gp.npc[0].worldY = gp.tileSize*25;
+    }
 }
