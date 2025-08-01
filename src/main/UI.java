@@ -15,6 +15,8 @@ public class UI {
     public String message = "";
     int messageCounter = 0;
     public boolean gameFinished = false;
+    public String currentDialogue = "";
+    public int commandNum = 0; // for menu navigation
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -35,6 +37,11 @@ public class UI {
 
         g2.setFont(arial_40);
         g2.setColor(Color.WHITE);
+
+        //Title state
+        if(gp.gameState == gp.titleState){
+            drawTitleScreen();
+        }
 
         //play state
         if(gp.gameState == gp.playState) {
@@ -108,11 +115,61 @@ public class UI {
 //            }
 //        }
     }
+    public void drawTitleScreen(){
+        g2.setColor(new Color(130, 200, 229));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+        //Title
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+        String text = "WYNDEL";
+        int x = getXForCenteredText(text);
+        int y = gp.tileSize * 3;
+
+        //shadow
+        g2.setColor(Color.gray);
+        g2.drawString(text, x + 5, y + 5);
+        //main color of title
+        g2.setColor(Color.WHITE);
+        g2.drawString(text, x, y);
+        //image of character
+        x = gp.screenWidth/2 - (gp.tileSize*2)/2;
+        y += gp.tileSize*2;
+        g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+
+        //MENU
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
+
+        text = "NEW GAME";
+        x = getXForCenteredText(text);
+        y += gp.tileSize * 3.5;
+        g2.drawString(text, x, y);
+        if(commandNum == 0) {
+            g2.drawString(">", x-gp.tileSize, y);
+        }
+
+        text = "LOAD GAME";
+        x = getXForCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if(commandNum == 1) {
+            g2.drawString(">", x-gp.tileSize, y);
+        }
+
+        text = "QUIT";
+        x = getXForCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if(commandNum == 2) {
+            g2.drawString(">", x-gp.tileSize, y);
+        }
+
+    }
+
     public void drawPauseScreen() {
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80));
         String text = "PAUSED";
         int x = getXForCenteredText(text);
-        int y = gp.screenHeight/2;
+        int y = gp.screenHeight*3;
 
         g2.drawString(text, x, y);
     }
@@ -121,18 +178,23 @@ public class UI {
         int x = gp.tileSize * 2;
         int y = gp.tileSize / 2;
         int width = gp.screenWidth - (gp.tileSize * 4);
-        int height = gp.tileSize * 5;
-
+        int height = gp.tileSize * 4;
         drawSubWindow(x, y, width, height);
+
+        x = gp.tileSize * 3;
+        y = gp.tileSize + gp.tileSize / 2;
+        g2.drawString(currentDialogue, x, y);
+
     }
     public void drawSubWindow(int x, int y, int width, int height){
         Color c = new Color(0, 0, 0, 200); // semi-transparent black
         g2.setColor(c);
         g2.fillRoundRect(x, y, width, height, 35, 35);
 
+
         g2.setStroke(new BasicStroke(5));
         g2.setColor(Color.WHITE);
-        g2.drawRect(x, y, width, height);
+        g2.drawRoundRect(x, y, width, height, 35, 35);
 
     }
 
