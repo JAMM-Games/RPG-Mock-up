@@ -79,6 +79,18 @@ public class KeyHandler implements KeyListener {
                     checkDrawTime = false;
                 }
             }
+            if (code == KeyEvent.VK_R) {
+                switch (gp.currentMap) {
+                    case 0 -> {
+                        gp.currentMap = 1;
+                        gp.tileM.loadMap("/maps/clean_worldV2.txt", 0);
+                    }
+                    case 1 -> {
+                        gp.currentMap = 0;
+                        gp.tileM.loadMap("/maps/zero-map.txt", 1);
+                    }
+                }
+            }
         }
         //pause state
         else if(gp.gameState == gp.pauseState){

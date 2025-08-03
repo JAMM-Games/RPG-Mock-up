@@ -25,6 +25,8 @@ public class GamePanel extends JPanel implements Runnable {
     // World settings
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
+    public final int maxMap = 10; // maximum number of maps that can be loaded.
+    public int currentMap = 0; // current map index
 //    public final int worldWidth = tileSize * maxWorldCol;
 //    public final int worldHeight = tileSize * maxWorldRow;
     //for full screen
@@ -150,11 +152,9 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void drawToTempScreen() {
-
         long drawStart = 0;
         if(keyH.checkDrawTime == true) {
             drawStart = System.nanoTime();
-
         }
 
         //TITLE SCREEN
