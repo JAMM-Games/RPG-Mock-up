@@ -23,6 +23,8 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0;
+    String[] dialogue = new String[20]; // Array to hold dialogue lines
+    public int dialogueIndex = 0; // Index to track current dialogue line
 
     public Entity(GamePanel gp){
         this.gp = gp;
@@ -31,6 +33,7 @@ public class Entity {
     public void setAction() {
 
     }
+    public void speak(){}
 
     public void update(){
 
@@ -120,4 +123,5 @@ public class Entity {
         }
         return image;
     }
+
 }
