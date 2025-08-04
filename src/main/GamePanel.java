@@ -27,8 +27,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxWorldRow = 50;
     public final int maxMap = 10; // maximum number of maps that can be loaded.
     public int currentMap = 0; // current map index
-//    public final int worldWidth = tileSize * maxWorldCol;
-//    public final int worldHeight = tileSize * maxWorldRow;
+    public final int worldWidth = tileSize * maxWorldCol;
+    public final int worldHeight = tileSize * maxWorldRow;
     //for full screen
     int screenWidth2 = screenWidth;
     int screenHeight2 = screenHeight;
@@ -73,7 +73,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         aSetter.setObject();
         aSetter.setNPC();
-        playMusic(1);
+        playMusic(2);
         gameState = titleState; // set the game state to play state
 
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
