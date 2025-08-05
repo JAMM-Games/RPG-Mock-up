@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
     public final int maxMap = 10; // maximum number of maps that can be loaded.
-    public int currentMap = 0; // current map index
+    public int currentMap = 1; // current map index
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
     //for full screen
@@ -48,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
+    public EventHandler eHandler = new EventHandler(this);
     Thread gameThread; // thread for the game loop. this will call the run method
 
     //ENTITY AND OBJECT
@@ -73,7 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         aSetter.setObject();
         aSetter.setNPC();
-        playMusic(2);
+        playMusic(3);
         gameState = titleState; // set the game state to play state
 
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);

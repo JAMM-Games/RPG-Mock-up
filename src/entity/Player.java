@@ -84,7 +84,13 @@ public class Player extends Entity {
         int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
         interactNPC(npcIndex);
 
-        //IF COLLISION IS FALSE, PLAYER CAN MOVE
+        //CHECK EVENT
+        gp.eHandler.checkEvent(gp.currentMap);
+
+        gp.keyH.enterPressed = false;
+
+
+            //IF COLLISION IS FALSE, PLAYER CAN MOVE
         if(!collisionOn) {
             switch (direction) {
                 case "up":
@@ -135,7 +141,7 @@ public class Player extends Entity {
                         gp.ui.showMessage("You opened the door!");
                         gp.ui.gameFinished = true;
                         gp.stopMusic();
-                        gp.playMusic(3);
+                        gp.playMusic(2);
                     }else {
                         gp.ui.showMessage("    You need a key");
                     }
@@ -157,7 +163,6 @@ public class Player extends Entity {
                 gp.npc[i].speak();
             }
         }
-        gp.keyH.enterPressed = false;
     }
 
     public void draw(Graphics2D g2) {

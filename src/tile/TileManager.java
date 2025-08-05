@@ -19,14 +19,13 @@ public class TileManager {
 
     public TileManager(GamePanel gp){
         this.gp = gp;
-        tile = new Tile[15];
+        tile = new Tile[16];
         mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 
 
         getTileImage();
-//        loadMap("/maps/zero-map.txt");
         loadMap("/maps/clean_worldV2.txt", 0);
-        loadMap("/maps/zero-map.txt", 1);
+        loadMap("/maps/clean_village-Map.txt", 1);
 
     }
 
@@ -48,7 +47,8 @@ public class TileManager {
         setup(11, "stones/left-stone-door-way", true); // grass tile
         setup(12, "stones/right-stone-door-way", true); // grass tile
         setup(13, "earths/mountain", true); // grass tile
-        setup(14, "/village", false); // grass tile
+        setup(14, "/village", false); // village tile
+        setup(15, "/blue-carpet", false); // carpet tile
 //            tile[1] = new Tile();
 //            tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/earths/grass1.png")));
 //            tile[2] = new Tile();
