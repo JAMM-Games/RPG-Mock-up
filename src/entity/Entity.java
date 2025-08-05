@@ -26,6 +26,10 @@ public class Entity {
     String[] dialogue = new String[20]; // Array to hold dialogue lines
     public int dialogueIndex = 0; // Index to track current dialogue line
 
+    //CHARACTER STATS
+    public int maxLife;
+    public int life;
+
     public Entity(GamePanel gp){
         this.gp = gp;
     }

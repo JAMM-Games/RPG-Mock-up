@@ -19,14 +19,13 @@ public class TileManager {
 
     public TileManager(GamePanel gp){
         this.gp = gp;
-        tile = new Tile[15];
+        tile = new Tile[16];
         mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 
 
         getTileImage();
-//        loadMap("/maps/zero-map.txt");
         loadMap("/maps/clean_worldV2.txt", 0);
-        loadMap("/maps/zero-map.txt", 1);
+        loadMap("/maps/clean_village-Map.txt", 1);
 
     }
 
@@ -48,7 +47,8 @@ public class TileManager {
         setup(11, "stones/left-stone-door-way", true); // grass tile
         setup(12, "stones/right-stone-door-way", true); // grass tile
         setup(13, "earths/mountain", true); // grass tile
-        setup(14, "/village", false); // grass tile
+        setup(14, "/village", false); // village tile
+        setup(15, "/blue-carpet", false); // carpet tile
 //            tile[1] = new Tile();
 //            tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/earths/grass1.png")));
 //            tile[2] = new Tile();
@@ -151,12 +151,35 @@ public class TileManager {
             int screenX = worldX - gp.player.worldX + gp.player.screenX;
             int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
+            //STOP MOVING CAMERA AT EDGE OF MAP
+            if(gp.player.screenX > gp.player.worldX) {
+                screenX = worldX;
+            }
+            if(gp.player.screenY > gp.player.worldY) {
+                screenY = worldY;
+            }
+            int rightLimit = gp.screenWidth - gp.player.screenX;
+            if(rightLimit > gp.worldWidth - gp.player.worldX) {
+                screenX = gp.screenWidth - (gp.worldWidth - worldX);
+            }
+            int bottomLimit = gp.screenHeight - gp.player.screenY;
+            if(bottomLimit > gp.worldHeight - gp.player.worldY){
+                screenY = gp.screenHeight - (gp.worldHeight - worldY);
+            }
+
+
             if(worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
                worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
                worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
 
                 // Only draw the tile if it is within the player's view
+                g2.drawImage(tile[tileNum].image, screenX, screenY, null);
+            }
+            else if (gp.player.screenX > gp.player.worldX ||
+                       gp.player.screenY > gp.player.worldY ||
+                       rightLimit > gp.worldWidth - gp.player.worldX ||
+                       bottomLimit > gp.worldHeight - gp.player.worldY) {
                 g2.drawImage(tile[tileNum].image, screenX, screenY, null);
             }
 

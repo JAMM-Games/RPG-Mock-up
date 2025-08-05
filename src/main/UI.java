@@ -1,6 +1,8 @@
 package main;
 
+import object.OBJ_Heart;
 import object.OBJ_Key;
+import object.SuperObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,6 +13,7 @@ public class UI {
     Graphics2D g2;
     Font arial_40, arial_80B;
 //    BufferedImage keyImage;
+    BufferedImage heartFull, heartEmpty;
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0;
@@ -25,6 +28,11 @@ public class UI {
         arial_80B = new Font("Arial", Font.BOLD, 80);
 //        OBJ_Key key = new OBJ_Key(gp);
 //        keyImage = key.image;
+
+        //CHAR HUD
+        SuperObject heart = new OBJ_Heart(gp);
+        heartFull = heart.image;
+        heartEmpty = heart.image2;
     }
 
     public void showMessage(String text) {
@@ -45,11 +53,13 @@ public class UI {
 
         //play state
         if(gp.gameState == gp.playState) {
+            drawPlayerLife();
 
         }
         //pause state
         if(gp.gameState == gp.pauseState) {
             drawPauseScreen();
+            drawPlayerLife();
         }
         //dialogue state
         if(gp.gameState == gp.dialogueState) {
@@ -115,6 +125,29 @@ public class UI {
 //            }
 //        }
     }
+
+    public void drawPlayerLife() {
+        int x = gp.tileSize / 2;
+        int y = gp.tileSize / 2;
+        int i = 0;
+        // Draw max hearts
+        while(i < gp.player.maxLife) {
+            g2.drawImage(heartEmpty, x, y, null);
+            i++;
+            x += gp.tileSize;
+        }
+        // reset
+        x = gp.tileSize / 2;
+        y = gp.tileSize / 2;
+        i = 0;
+        // Draw full heart
+        while(i < gp.player.life) {
+            g2.drawImage(heartFull, x, y, null);
+            i++;
+            x += gp.tileSize;
+        }
+    }
+
     public void drawTitleScreen(){
         g2.setColor(new Color(130, 200, 229));
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);

@@ -45,6 +45,10 @@ public class Player extends Entity {
         worldY = gp.tileSize * 21; // set initial worldY position
         speed = 4;
         direction = "down";
+
+        // PLAYER STATS
+        maxLife = 3;
+        life = maxLife;
     }
 
     public void getPlayerImage() {
@@ -80,7 +84,13 @@ public class Player extends Entity {
         int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
         interactNPC(npcIndex);
 
-        //IF COLLISION IS FALSE, PLAYER CAN MOVE
+        //CHECK EVENT
+        gp.eHandler.checkEvent(gp.currentMap);
+
+        gp.keyH.enterPressed = false;
+
+
+            //IF COLLISION IS FALSE, PLAYER CAN MOVE
         if(!collisionOn) {
             switch (direction) {
                 case "up":
@@ -131,7 +141,7 @@ public class Player extends Entity {
                         gp.ui.showMessage("You opened the door!");
                         gp.ui.gameFinished = true;
                         gp.stopMusic();
-                        gp.playMusic(1);
+                        gp.playMusic(2);
                     }else {
                         gp.ui.showMessage("    You need a key");
                     }
@@ -153,7 +163,6 @@ public class Player extends Entity {
                 gp.npc[i].speak();
             }
         }
-        gp.keyH.enterPressed = false;
     }
 
     public void draw(Graphics2D g2) {
@@ -178,7 +187,27 @@ public class Player extends Entity {
                 if(spriteNum == 2) image = right2;
                 break;
         }
-        g2.drawImage(image, screenX, screenY,null);
+        int x = screenX;
+        int y = screenY;
+
+        if(screenX > worldX) {
+            x = worldX;
+        }
+        if(screenY > worldY) {
+            y = worldY;
+        }
+
+        int rightLimit = gp.screenWidth - screenX;
+        if(rightLimit > gp.worldWidth - worldX) {
+            x = gp.screenWidth - (gp.worldWidth - worldX);
+        }
+        int bottomLimit = gp.screenHeight - screenY;
+        if(bottomLimit > gp.worldHeight - worldY){
+            y = gp.screenHeight - (gp.worldHeight - worldY);
+        }
+
+
+        g2.drawImage(image, x, y,null);
 
     }
 }

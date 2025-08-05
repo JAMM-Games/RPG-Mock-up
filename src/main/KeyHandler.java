@@ -87,7 +87,7 @@ public class KeyHandler implements KeyListener {
                     }
                     case 1 -> {
                         gp.currentMap = 0;
-                        gp.tileM.loadMap("/maps/zero-map.txt", 1);
+                        gp.tileM.loadMap("/maps/clean_village-Map.txt", 1);
                     }
                 }
             }
