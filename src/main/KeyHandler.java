@@ -52,8 +52,8 @@ public class KeyHandler implements KeyListener {
             }
         }
 
-
-        if(gp.gameState == gp.playState) {
+        //PLAY STATE
+        else if(gp.gameState == gp.playState) {
             if (code == KeyEvent.VK_W) {
                 upPressed = true;
             }
@@ -70,6 +70,8 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = gp.pauseState;
             }if (code == KeyEvent.VK_ENTER) {
                 enterPressed = true;
+            }if (code == KeyEvent.VK_ESCAPE) {
+                gp.gameState = gp.optionsState;
             }
 
             if (code == KeyEvent.VK_T) {
@@ -102,6 +104,60 @@ public class KeyHandler implements KeyListener {
         else if(gp.gameState == gp.dialogueState){
             if(code == KeyEvent.VK_ENTER){
                 gp.gameState = gp.playState;
+            }
+        }
+
+        //options state
+        else if(gp.gameState == gp.optionsState){
+            if (code == KeyEvent.VK_ESCAPE) {
+                gp.gameState = gp.playState;
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                enterPressed = true;
+            }
+
+            int maxCommandNum = 0; // Assuming there are 3 options in the options menu
+            switch(gp.ui.subState){
+                case 0: maxCommandNum = 5; // Assuming 3 sound options
+                    break;
+                case 3: maxCommandNum = 1; // Assuming 2 options in the controls menu
+                    break;
+            }
+            if (code == KeyEvent.VK_W) {
+                gp.ui.commandNum--;
+                if(gp.ui.commandNum < 0) {
+                    gp.ui.commandNum = maxCommandNum; // Wrap around to the last command
+                }
+            }
+            if (code == KeyEvent.VK_S) {
+                gp.ui.commandNum++;
+                if(gp.ui.commandNum > maxCommandNum) {
+                    gp.ui.commandNum = 0; // Wrap around to the first command
+                }
+            }
+            if(code == KeyEvent.VK_A){
+                if(gp.ui.subState == 0) { // Sound options
+                    if(gp.ui.commandNum == 1 && gp.music.volumeScale > 0){ // Music volume
+                        gp.music.volumeScale--;
+                        gp.music.checkVolume();
+                    }
+                    if(gp.ui.commandNum == 2 && gp.se.volumeScale > 0){ // Music volume
+                        gp.se.volumeScale--;
+                        gp.se.checkVolume();
+                    }
+                }
+            }
+            if(code == KeyEvent.VK_D){
+                if(gp.ui.subState == 0) { // Sound options
+                    if(gp.ui.commandNum == 1 && gp.music.volumeScale < 5){ // Music volume
+                        gp.music.volumeScale++;
+                        gp.music.checkVolume();
+                    }
+                    if(gp.ui.commandNum == 2 && gp.se.volumeScale < 5){ // Music volume
+                        gp.se.volumeScale++;
+                        gp.se.checkVolume();
+                    }
+                }
             }
         }
     }

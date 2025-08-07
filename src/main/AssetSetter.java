@@ -1,5 +1,6 @@
 package main;
 
+import monster.MERCURY_slime;
 import object.OBJ_Boots;
 import object.OBJ_Door;
 import object.OBJ_Key;
@@ -32,5 +33,16 @@ public class AssetSetter {
         gp.npc[0] = new entity.Shy_NPC(gp);
         gp.npc[0].worldX = gp.tileSize*25;
         gp.npc[0].worldY = gp.tileSize*25;
+    }
+
+    public void setMonster() {
+
+        gp.monster[0] = new MERCURY_slime(gp);
+        gp.monster[0].worldX = 32 * gp.tileSize; // set the x position of the monster
+        gp.monster[0].worldY = 32 * gp.tileSize; // set the y position of the monster
+
+        gp.monster[1] = new MERCURY_slime(gp);
+        gp.monster[1].worldX = 36 * gp.tileSize; // set the x position of the monster
+        gp.monster[1].worldY = 32 * gp.tileSize; // set the y position of the monster
     }
 }

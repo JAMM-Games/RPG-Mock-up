@@ -37,6 +37,7 @@ public class GamePanel extends JPanel implements Runnable {
     int screenHeight2 = screenHeight;
     BufferedImage tempScreen; // for full screen
     Graphics2D g2;
+    public boolean fullScreenOn = false; // for full screen mode
 
     //FPS
     public int FPS = 60;
@@ -58,6 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH); // create a player object
     public Entity[] obj = new Entity[10]; // array to hold objects in the game
     public Entity[] npc = new Entity[10];
+    public Entity[] monster = new Entity[20]; // array to hold monsters in the game
     ArrayList<Entity> entityList = new ArrayList<>();
     //GAME STATE
     public int gameState;
@@ -65,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
+    public final int optionsState = 5;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -77,6 +80,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         aSetter.setObject();
         aSetter.setNPC();
+        aSetter.setMonster();
         playMusic(3);
         gameState = titleState; // set the game state to play state
 
@@ -149,6 +153,16 @@ public class GamePanel extends JPanel implements Runnable {
                     npc[i].update();
                 }
             }
+            for(int i = 0; i < monster.length; i++) {
+                if(monster[i] != null) {
+                    if(monster[i].alive && monster[i].dying == false) {
+                        monster[i].update();
+                    }
+                    if(!monster[i].alive){
+                        monster[i] = null; // remove the monster from the array if it is not alive
+                    }
+                }
+            }
         }
         if(gameState == pauseState) {
             // nothing
@@ -183,6 +197,12 @@ public class GamePanel extends JPanel implements Runnable {
             for (int i = 0; i < npc.length; i++) {
                 if (npc[i] != null) {
                     entityList.add(npc[i]);
+                }
+            }
+            //MONSTER
+            for (int i = 0; i < monster.length; i++) {
+                if (monster[i] != null) {
+                    entityList.add(monster[i]);
                 }
             }
             //render order (sort)

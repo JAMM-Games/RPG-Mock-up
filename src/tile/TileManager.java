@@ -142,7 +142,7 @@ public class TileManager {
         int worldCol = 0;
         int worldRow = 0;
 
-        while (worldRow < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
+        while ((worldCol < gp.maxWorldCol) && (worldRow < gp.maxWorldRow)) {
 
             int tileNum = mapTileNum[gp.currentMap][worldCol][worldRow];
 
@@ -166,22 +166,26 @@ public class TileManager {
             if(bottomLimit > gp.worldHeight - gp.player.worldY){
                 screenY = gp.screenHeight - (gp.worldHeight - worldY);
             }
-
-
-            if(worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
-               worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-               worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
-               worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-
-                // Only draw the tile if it is within the player's view
+            // Simplified visibility check - only draw tiles visible on screen
+            if(screenX + gp.tileSize > 0 && screenX < gp.screenWidth &&
+                    screenY + gp.tileSize > 0 && screenY < gp.screenHeight) {
                 g2.drawImage(tile[tileNum].image, screenX, screenY, null);
             }
-            else if (gp.player.screenX > gp.player.worldX ||
-                       gp.player.screenY > gp.player.worldY ||
-                       rightLimit > gp.worldWidth - gp.player.worldX ||
-                       bottomLimit > gp.worldHeight - gp.player.worldY) {
-                g2.drawImage(tile[tileNum].image, screenX, screenY, null);
-            }
+//
+//            if(worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
+//               worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
+//               worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
+//               worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+//
+//                // Only draw the tile if it is within the player's view
+//                g2.drawImage(tile[tileNum].image, screenX, screenY, null);
+//            }
+//            else if (gp.player.screenX > gp.player.worldX ||
+//                       gp.player.screenY > gp.player.worldY ||
+//                       rightLimit > gp.worldWidth - gp.player.worldX ||
+//                       bottomLimit > gp.worldHeight - gp.player.worldY) {
+//                g2.drawImage(tile[tileNum].image, screenX, screenY, null);
+//            }
 
             worldCol++;
 
