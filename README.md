@@ -4,7 +4,7 @@
 Growing up I often watched videos of minecraft letsplay's. Back then the Bedrock edition wasnt a thing and mojang was still a sole entity. I was only able to play when visiting my friends house since I never was able to buy it myself. Regardless I was baffled by the game itself.
 I wondered how it worked and I discovered it was made in Java. That didnt mean much to me back then because I didnt know what Java was but now that I am a programmer I have the power to create my own game!
 
-### But... how? 
+### How? 
 I don't know the first thing about game development. I figured that Capstone is the perfect time to experiment and learn for myself. So i did, and this is the result. Not to shabby for a first "RPG" and its far from done but im proud of it. I plan on working on this plenty in the future.
 I heavily underestimated how development really goes. I dont know if I figured sprites and tiles were just magically be in my project but I never thought about having to design my own tiles and characters. I was so focused on building a game engine.
 I learned late in the learn/build process that you if youre making a new engine, you should have the game concept solid and make the engine around the game, not the reverse. (guess which one i did lol) A big set back which halted development for a bit.
