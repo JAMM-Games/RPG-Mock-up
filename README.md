@@ -18,3 +18,87 @@ I still need to implament many things. Due to changing the structure of my proje
 I designed everything in the game including characters, I updated some tiles to look more like a youtubers tileset. All characters are purely testing sprites and subject to change.
 As the title of the repo states this is a high fidelity mock up of the game I want to create. I plan to develop this game in a bigger engine built using LWJGL. (or i might cave and use unreal or something)
 That being said feel free to take this and mess around with it, change it, break it, learn more. I know im still learning, but the process so far has been super fun and I cant wait to learn more.
+
+<img width="1068" height="604" alt="Screenshot 2025-11-06 at 3 13 08 PM" src="https://github.com/user-attachments/assets/a6a44f09-94f2-4bf9-8974-efd0ea7d3234" />
+
+<img width="1040" height="313" alt="Screenshot 2025-11-06 at 3 14 22 PM" src="https://github.com/user-attachments/assets/42643eee-e092-4313-a01d-f153073fb528" />
+
+# 2D RPG Mockup
+
+A small 2D role-playing game prototype built in Java. This project was my first attempt at creating a game from scratch using Java libraries for graphics, input handling, and basic game logic.
+
+---
+
+## Preview / Screenshots
+
+Insert screenshots or GIFs of your game here:
+
+![Game Screenshot](insert-image-link-here.png)  
+![Gameplay GIF](insert-gif-link-here.gif)
+
+---
+
+## Table of Contents
+
+- [About the Project](#about-the-project)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [How It Works](#how-it-works)
+- [Screenshots](#screenshots)
+- [Future Improvements](#future-improvements)
+- [License](#license)
+- [Contact](#contact)
+
+---
+
+## About the Project
+
+This project was created to explore the fundamentals of 2D game development in Java, including rendering, entity systems, and simple interactions. The goal was to understand how a basic game loop works and how to organize game logic and rendering efficiently.
+
+It serves as an early prototype or mockup rather than a full game, focusing on learning core mechanics before adding content or polish.
+
+---
+
+## Features
+
+- Tile-based world rendering  
+- Basic player movement and collision detection  
+- Simple NPCs and dialogue interaction system  
+- Keyboard input handling  
+- Scene switching (e.g., map, menu, dialogue states)
+
+---
+
+## Technologies Used
+
+- **Language:** Java  
+- **Libraries:**  
+  - Java AWT / Swing (for rendering and input)  
+  - Custom-built classes for game loop and asset management  
+  - (Optional) Python integration for scripting logic (if applicable)
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- [Java JDK 17+](https://adoptium.net/)  
+- A Java-compatible IDE (e.g., IntelliJ IDEA, Eclipse, VS Code with Java extension)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/2d-rpg-mockup.git
+cd 2d-rpg-mockup
+
+# Open the project in your IDE
+# Build and run the main game file (Main.java)
+
+
+
+
